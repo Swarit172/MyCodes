@@ -1,0 +1,20 @@
+class Solution(object):
+    def kthPalindrome(self, queries, intLength):
+        """
+        :type queries: List[int]
+        :type intLength: int
+        :rtype: List[int]
+        """
+        start = 10 ** ((intLength - 1) // 2)
+        max_val = start * 10 - 1
+
+        def query(i):
+            val = start + i - 1
+            if val > max_val:
+                return -1
+            s = str(val)
+            if intLength % 2 == 0:
+                return int(s + s[::-1])
+            else:
+                return int(s[:-1] + s[::-1])
+        return [query(i) for i in queries]
