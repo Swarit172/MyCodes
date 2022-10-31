@@ -4,13 +4,15 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        stack = ['N']
+        stack = []
         dict = {')':'(',']':'[','}':'{'}
         for i in s:
-            if i in dict.keys():
-                if stack.pop() != dict[i]:
+            if i in dict:
+                if stack and stack[-1]==dict[i]:
+                    stack.pop()
+                else:
                     return False
             else:
                 stack.append(i)
                 
-        return len(stack) == 1
+        return True if not stack else False
