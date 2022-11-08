@@ -24,23 +24,19 @@ class Solution(object):
         #Time limit exceed  ;(
         """
         
-        ans=''
-        carry=0
-        a=a[::-1]
-        b=b[::-1]
-        for i in range(max(len(a),len(b))):
-            if i<len(a):
-                digitA=ord(a[i])-ord("0") 
-            else:
-                digitA=0
-            if i<len(b):
-                digitB=ord(b[i])-ord("0") 
-            else:
-                digitB=0
-            total=digitA+digitB+carry
-            char=str(total%2)
-            ans=char+ans
-            carry=total//2
-        if carry:
-            ans="1"+ans
-        return ans
+        carry = 0
+        result = ''
+
+        a = list(a)
+        b = list(b)
+
+        while a or b or carry:
+            if a:
+                carry += int(a.pop())
+            if b:
+                carry += int(b.pop())
+
+            result += str(carry %2)
+            carry //= 2
+
+        return result[::-1]
